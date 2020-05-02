@@ -1,0 +1,47 @@
+<div class="hero-head">
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-brand">
+                <span class="navbar-item">
+                    <a class="button is-white is-outlined is-size-5" href="{{ path('home') }}">
+                        MyLegoWorld
+                    </a>
+                </span>
+
+                <span class="navbar-burger burger" data-target="navbarMenu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </span>
+            </div>
+            <div id="navbarMenu" class="navbar-menu">
+                <div class="navbar-end">
+{#                    <span class="navbar-item">#}
+{#                        <a class="button is-white is-outlined" href="#">#}
+{#                            <span class="icon">#}
+{#                                <i class="fa fa-home"></i>#}
+{#                            </span>#}
+{#                            <span>Home</span>#}
+{#                        </a>#}
+{#                    </span>#}
+                    <span class="navbar-item">
+                        <a class="button is-white is-outlined" href="{{ path('app_login') }}">
+                            <span class="icon">
+                                <i class="fas fa-user-astronaut"></i>
+                            </span>
+                            <span>{{ 'login.title'|trans|capitalize }}</span>
+                        </a>
+                    </span>
+                    <span class="navbar-item">
+                        <a class="button is-white {% if app.request.attributes.get('_route') in ['app_register'] %} is-active {% else %} is-outlined {% endif %}" href="{{ path('app_register') }}">
+                            <span class="icon">
+                                <i class="fa fa-book"></i>
+                            </span>
+                            <span>{{ 'register.title'|trans|capitalize }}</span>
+                        </a>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </nav>
+</div>

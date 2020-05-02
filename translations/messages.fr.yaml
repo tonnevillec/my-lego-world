@@ -1,0 +1,25 @@
+back_to_site: 'Retour au site'
+
+login:
+    title: 'connexion'
+    subtitle: ''
+    btn_connection: 'se connecter'
+    btn_signup: "s'inscrire"
+    sign_up: "s'inscrire"
+    forgot_password: 'mot de passe oublié'
+    need_help: "besoin d'aide"
+    sign_in: 'se connecter'
+
+register:
+    title: 'inscription'
+    subtitle: ''
+
+user:
+    username:
+        placeholder: "nom d'utilisateur"
+    password:
+        placeholder: 'mot de passe'
+        repeat: 'répéter le mot de passe'
+    email:
+        placeholder: 'adresse email'
+    remember_me: 'se rappeler de moi'

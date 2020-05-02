@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>{% block title %}{% endblock %}</title>
+
+        {{ encore_entry_link_tags('style') }}
+        {% block stylesheets %}
+        {% endblock %}
+    </head>
+    <body>
+
+    <section id="{% block css_page %}{% endblock %}" class="hero is-fullheight is-info">
+        {% include 'menu.html.twig' %}
+
+        <div class="hero-body">
+            {% block body %}{% endblock %}
+        </div>
+    </section>
+
+
+        {{ encore_entry_script_tags('app') }}
+        {% block javascripts %}{% endblock %}
+    </body>
+</html>
