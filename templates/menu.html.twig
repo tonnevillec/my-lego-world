@@ -1,47 +1,79 @@
-<div class="hero-head">
-    <nav class="navbar">
-        <div class="container">
-            <div class="navbar-brand">
-                <span class="navbar-item">
-                    <a class="button is-white is-outlined is-size-5" href="{{ path('home') }}">
-                        MyLegoWorld
-                    </a>
-                </span>
+<nav id="mainNavbar" class="navbar is-dark has-shadow has-text-white">
+    <div class="navbar-brand">
+        <span class="navbar-item">
+            <a class="button is-outlined is-size-5" href="{{ path('home') }}">
+                MyLegoWorld
+            </a>
+        </span>
 
-                <span class="navbar-burger burger" data-target="navbarMenu">
-                    <span></span>
-                    <span></span>
-                    <span></span>
+        <span class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarMenu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </span>
+    </div>
+
+    <div id="navbarMenu" class="navbar-menu">
+        <div class="navbar-start">
+            <a class="navbar-item {% if app.request.get('_route') in ['home'] %}is-active{% endif %}" href="{{ path('home') }}">
+                <span class="icon">
+                    <i class="fa fa-home"></i>
                 </span>
-            </div>
-            <div id="navbarMenu" class="navbar-menu">
-                <div class="navbar-end">
-{#                    <span class="navbar-item">#}
-{#                        <a class="button is-white is-outlined" href="#">#}
-{#                            <span class="icon">#}
-{#                                <i class="fa fa-home"></i>#}
-{#                            </span>#}
-{#                            <span>Home</span>#}
-{#                        </a>#}
-{#                    </span>#}
-                    <span class="navbar-item">
-                        <a class="button is-white is-outlined" href="{{ path('app_login') }}">
-                            <span class="icon">
-                                <i class="fas fa-user-astronaut"></i>
-                            </span>
-                            <span>{{ 'login.title'|trans|capitalize }}</span>
-                        </a>
+                <span>Home</span>
+            </a>
+
+            {% if app.user %}
+            <a class="navbar-item {% if app.request.get('_route') in ['test'] %}is-active{% endif %}" href="#">
+                <span class="icon">
+                    <i class="fa fa-plus"></i>
+                </span>
+                <span>Légothèque</span>
+            </a>
+            {% endif %}
+        </div>
+
+        <div class="navbar-end">
+            {% if app.user %}
+                {% set user_routes = ['user.profil'] %}
+            <div class="navbar-item has-dropdown is-hoverable {% if app.request.get('_route') in user_routes %}is-current{% endif %}">
+                <a class="navbar-link">
+                    <span class="icon">
+                        <i class="fas fa-user-astronaut"></i>
                     </span>
-                    <span class="navbar-item">
-                        <a class="button is-white {% if app.request.attributes.get('_route') in ['app_register'] %} is-active {% else %} is-outlined {% endif %}" href="{{ path('app_register') }}">
-                            <span class="icon">
-                                <i class="fa fa-book"></i>
-                            </span>
-                            <span>{{ 'register.title'|trans|capitalize }}</span>
-                        </a>
-                    </span>
+                    <span>{{ app.user }}</span>
+                </a>
+
+                <div class="navbar-dropdown is-right has-text-info is-dark">
+                    <a href="{{ path('user.profil') }}" class="navbar-item">
+                        <span class="icon">
+                            <i class="fas fa-user-astronaut"></i>
+                        </span>
+                        <span>{{ 'user.profil.title'|trans|capitalize }}</span>
+                    </a>
+
+                    <a href="{{ path('app_logout') }}" class="navbar-item">
+                        <span class="icon">
+                            <i class="fas fa-user-astronaut"></i>
+                        </span>
+                        <span>{{ 'logout.title'|trans|capitalize }}</span>
+                    </a>
                 </div>
             </div>
+            {% else %}
+            <a class="navbar-item {% if app.request.get('_route') in ['app_login'] %}is-active{% endif %}" href="{{ path('app_login') }}">
+                <span class="icon">
+                    <i class="fas fa-user-astronaut"></i>
+                </span>
+                <span>{{ 'login.title'|trans|capitalize }}</span>
+            </a>
+
+            <a class="navbar-item {% if app.request.get('_route') in ['app_register'] %}is-active{% endif %}" href="{{ path('app_register') }}">
+                <span class="icon">
+                    <i class="fa fa-book"></i>
+                </span>
+                <span>{{ 'register.title'|trans|capitalize }}</span>
+            </a>
+            {% endif %}
         </div>
-    </nav>
-</div>
+    </div>
+</nav>

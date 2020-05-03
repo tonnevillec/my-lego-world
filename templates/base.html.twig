@@ -10,14 +10,19 @@
     </head>
     <body>
 
-    <section id="{% block css_page %}{% endblock %}" class="hero is-fullheight is-info">
         {% include 'menu.html.twig' %}
 
-        <div class="hero-body">
-            {% block body %}{% endblock %}
-        </div>
-    </section>
+        <section id="{% block css_page %}{% endblock %}" class="{% block css_page_class %}hero is-fullheight{% endblock %}">
+            <div class="hero-body">
+                {% block body %}{% endblock %}
+            </div>
+        </section>
 
+        <footer class="footer is-dark">
+            <div class="has-text-centered has-text-white">
+                <p>Test moi please</p>
+            </div>
+        </footer>
 
         {{ encore_entry_script_tags('app') }}
         {% block javascripts %}{% endblock %}

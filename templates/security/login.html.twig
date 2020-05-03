@@ -6,10 +6,10 @@
 
 {% block body %}
     <div class="container has-text-centered">
-        <div class="column is-4 is-offset-4">
-            <h3 class="title">{{ 'login.title'|trans|capitalize }}</h3>
+        <div class="column is-6 is-offset-3">
+            <h3 class="title has-text-white">{{ 'login.title'|trans|capitalize }}</h3>
             <hr class="login-hr">
-            <p class="subtitle">{{ 'login.subtitle'|trans|capitalize }}</p>
+            <p class="subtitle has-text-white">{{ 'login.subtitle'|trans|capitalize }}</p>
             <div class="box">
                 <figure class="avatar">
                     {% set v_rand = 'build/images/lego_face_' ~ random(1,4) ~ '.png' %}
@@ -48,9 +48,9 @@
                 </form>
             </div>
             <p class="has-text-white">
-                <a href="{{ path('app_register') }}" class="has-text-white">{{ 'login.sign_up'|trans|capitalize }}</a> &nbsp;·&nbsp;
-                <a href="../" class="has-text-white">{{ 'login.forgot_password'|trans|capitalize }}</a> &nbsp;·&nbsp;
-                <a href="../" class="has-text-white">{{ 'login.need_help'|trans|capitalize }}?</a>
+                <a href="{{ path('app_register') }}">{{ 'login.sign_up'|trans|capitalize }}</a> &nbsp;·&nbsp;
+                <a href="../">{{ 'login.forgot_password'|trans|capitalize }}</a> &nbsp;·&nbsp;
+                <a href="../">{{ 'login.need_help'|trans|capitalize }}?</a>
             </p>
         </div>
     </div>

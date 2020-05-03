@@ -1,4 +1,16 @@
 back_to_site: 'Retour au site'
+required_field: 'champ requis'
+
+btn:
+    validate: 'valider les modifications'
+    change_email: "changer d'adresse e-mail"
+    change_password: "changer de mot de passe"
+    delete_account: 'supprimer mon compte'
+    delete_confirm: 'confirmer la suppression'
+    cancel: 'annuler'
+
+delete:
+    are_you_sure: "êtes-vous sûre de vouloir supprimer votre compte ainsi que tout son contenu? Cette opération est irréversible et nous serons très triste de vous perdre :("
 
 login:
     title: 'connexion'
@@ -10,6 +22,8 @@ login:
     need_help: "besoin d'aide"
     sign_in: 'se connecter'
 
+logout.title: 'déconnexion'
+
 register:
     title: 'inscription'
     subtitle: ''
@@ -17,9 +31,52 @@ register:
 user:
     username:
         placeholder: "nom d'utilisateur"
+        label: "nom d'utilisateur"
     password:
         placeholder: 'mot de passe'
         repeat: 'répéter le mot de passe'
+        confirm: 'confirmer le mot de passe'
+        new: 'nouveau mot de passe'
     email:
-        placeholder: 'adresse email'
+        placeholder: 'adresse e-mail'
     remember_me: 'se rappeler de moi'
+    profil:
+        title: 'mon compte'
+        informations: 'mes informations'
+        email: 'mon e-mail'
+        password: 'mon mot de passe'
+        validate_update: 'votre compte a été modifié'
+        error_update: 'erreur lors de la modification de votre compte'
+        new_email:
+            label: 'nouvelle adresse e-mail'
+            validation: 'valider mon adresse e-mail'
+            help: 'pour valider vos modifications, saisissez votre mot de passe et cliquez sur « Modifier mon adresse e-mail »'
+            validate_update: 'votre e-mail a été modifié'
+            fail_update: 'mot de passe invalide'
+        new_password:
+            label: 'nouveau mot de passe'
+            validation: 'modifier le mot de passe'
+            help: 'pour valider vos modifications, saisissez votre mot de passe et cliquez sur « Modifier  le mot de passe »'
+            validate_update: 'votre mot de passe a été modifié'
+            fail_update: 'mot de passe invalide'
+        delete:
+            title: 'supprimer mon compte'
+            help: 'pour valider la suppression de votre compte, saisissez votre mot de passe et cliquez sur « Confirmer la suppression »'
+            validate_update: 'votre compte a été supprimé'
+            fail_update: 'mot de passe invalide'
+    gender:
+        label: 'civilité'
+    firstname:
+        label: 'nom'
+    lastname:
+        label: 'prénom'
+    address:
+        label: 'adresse'
+    postal_code:
+        label: 'code postal'
+    city:
+        label: 'ville'
+    birthdate:
+        label: 'date de naissance'
+    phone_number:
+        label: 'téléphone'

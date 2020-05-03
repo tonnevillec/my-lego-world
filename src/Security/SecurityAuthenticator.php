@@ -19,6 +19,7 @@ use Symfony\Component\Security\Csrf\CsrfTokenManagerInterface;
 use Symfony\Component\Security\Guard\Authenticator\AbstractFormLoginAuthenticator;
 use Symfony\Component\Security\Guard\PasswordAuthenticatedInterface;
 use Symfony\Component\Security\Http\Util\TargetPathTrait;
+use Symfony\Component\Validator\Constraints\Date;
 
 class SecurityAuthenticator extends AbstractFormLoginAuthenticator implements PasswordAuthenticatedInterface
 {
@@ -67,12 +68,21 @@ class SecurityAuthenticator extends AbstractFormLoginAuthenticator implements Pa
             throw new InvalidCsrfTokenException();
         }
 
-        $user = $this->entityManager->getRepository(User::class)->findOneBy(['email' => $credentials['username']]);
+        $user = $this->entityManager
+            ->getRepository(User::class)
+            ->findOneBy([
+                'email' => $credentials['username'],
+                'is_actif' => true
+            ]);
 
         if (!$user) {
             // fail authentication with a custom error
             throw new CustomUserMessageAuthenticationException('Username could not be found.');
         }
+
+        $user->setLastConnectionDate(new \DateTime());
+        $this->entityManager->persist($user);
+        $this->entityManager->flush();
 
         return $user;
     }

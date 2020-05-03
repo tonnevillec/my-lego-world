@@ -2,14 +2,14 @@
 
 {% block title %}{{ 'register.title'|trans|capitalize }}{% endblock %}
 
-{% block css_page %}css_login{% endblock %}
+{% block css_page %}css_register{% endblock %}
 
 {% block body %}
     <div class="container has-text-centered">
-        <div class="column is-4 is-offset-4">
-            <h3 class="title">{{ 'register.title'|trans|capitalize }}</h3>
+        <div class="column is-6 is-offset-3">
+            <h3 class="title has-text-white">{{ 'register.title'|trans|capitalize }}</h3>
             <hr class="login-hr">
-            <p class="subtitle">{{ 'register.subtitle'|trans|capitalize }}</p>
+            <p class="subtitle has-text-white">{{ 'register.subtitle'|trans|capitalize }}</p>
             <div class="box">
                 <figure class="avatar">
                     {% set v_rand = 'build/images/lego_face_' ~ random(1,4) ~ '.png' %}
@@ -78,9 +78,9 @@
                 {{ form_end(form) }}
             </div>
             <p class="has-text-white">
-                <a class="has-text-white" href="{{ path('app_login') }}">{{ 'login.sign_in'|trans|capitalize }}</a> &nbsp;·&nbsp;
-                <a class="has-text-white" href="../">{{ 'login.forgot_password'|trans|capitalize }}</a> &nbsp;·&nbsp;
-                <a class="has-text-white" href="../">{{ 'login.need_help'|trans|capitalize }}?</a>
+                <a href="{{ path('app_login') }}">{{ 'login.sign_in'|trans|capitalize }}</a> &nbsp;·&nbsp;
+                <a href="../">{{ 'login.forgot_password'|trans|capitalize }}</a> &nbsp;·&nbsp;
+                <a href="../">{{ 'login.need_help'|trans|capitalize }}?</a>
             </p>
         </div>
     </div>

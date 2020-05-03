@@ -1,0 +1,634 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ 'user.profil.title'|trans|capitalize }}{% endblock %}
+
+{% block css_page %}css_profil{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <div class="columns">
+            <div class="column is-3">
+                <aside class="menu" id="left_menu">
+                    <h1 class="menu-label">
+                        {{ 'user.profil.title'|trans }}
+                    </h1>
+                    <ul class="menu-list">
+                        <li>
+                            <a href="#a_informations">{{ 'user.profil.informations'|trans|capitalize }}</a>
+                        </li>
+                        <li>
+                            <a href="#a_email">{{ 'user.profil.email'|trans|capitalize }}</a>
+                        </li>
+                        <li>
+                            <a href="#a_password">{{ 'user.profil.password'|trans|capitalize }}</a>
+                        </li>
+                        <li>
+                            <a href="#a_deleteaccount">{{ 'user.profil.delete.title'|trans|capitalize }}</a>
+                        </li>
+                    </ul>
+                </aside>
+            </div>
+
+            <div class="column" id="content">
+                <section>
+                    <div class="box" id="a_informations">
+                        <h2>{{ 'user.profil.informations'|trans|capitalize }}</h2>
+
+                        {% for label, messages in app.flashes %}
+                            {% for message in messages %}
+                                <div class="notification is-{{ label }}">
+                                    <button class="delete" data-dismiss="notification"></button>
+                                    {{ message|capitalize }}
+                                </div>
+                            {% endfor %}
+                        {% endfor %}
+
+                        {{ form_start(form) }}
+                        <div class="field">
+                            {{ form_label(form.username) }}
+
+                            <div class="control has-icons-left has-icons-right">
+                                {{ form_widget(form.username, {'attr': {'class':'input is-small'}}) }}
+                                <span class="icon is-small is-left">
+                                  <i class="fas fa-user"></i>
+                                </span>
+                                <span class="icon is-small is-right has-text-danger" title="{{ 'required_field'|trans|capitalize }}">
+                                  <i class="fas fa-asterisk"></i>
+                                </span>
+                            </div>
+                            {% if form_errors(form.username) %}
+                            <div class="help is-danger">{{ form_errors(form.username) }}</div>
+                            {% endif %}
+                        </div>
+
+                        <div class="field">
+                            {{ form_label(form.gender) }}
+
+                            <div class="control select is-small is-fullwidth">
+                                {{ form_widget(form.gender) }}
+                            </div>
+                            {% if form_errors(form.gender) %}
+                                <div class="help is-danger">{{ form_errors(form.gender) }}</div>
+                            {% endif %}
+                        </div>
+
+                        <div class="field">
+                            {{ form_label(form.firstname) }}
+
+                            <div class="control">
+                                {{ form_widget(form.firstname, {'attr': {'class':'input is-small'}}) }}
+                            </div>
+                            {% if form_errors(form.firstname) %}
+                                <div class="help is-danger">{{ form_errors(form.firstname) }}</div>
+                            {% endif %}
+                        </div>
+
+                        <div class="field">
+                            {{ form_label(form.lastname) }}
+
+                            <div class="control">
+                                {{ form_widget(form.lastname, {'attr': {'class':'input is-small'}}) }}
+                            </div>
+                            {% if form_errors(form.lastname) %}
+                                <div class="help is-danger">{{ form_errors(form.lastname) }}</div>
+                            {% endif %}
+                        </div>
+
+                        <div class="field">
+                            {{ form_label(form.address) }}
+
+                            <div class="control has-icons-left">
+                                {{ form_widget(form.address, {'attr': {'class':'input is-small'}}) }}
+                                <span class="icon is-small is-left">
+                                  <i class="fas fa-address-card"></i>
+                                </span>
+                            </div>
+                            {% if form_errors(form.address) %}
+                                <div class="help is-danger">{{ form_errors(form.address) }}</div>
+                            {% endif %}
+                        </div>
+
+                        <div class="field">
+                            {{ form_label(form.postal_code) }}
+
+                            <div class="control has-icons-left">
+                                {{ form_widget(form.postal_code, {'attr': {'class':'input is-small'}}) }}
+                                <span class="icon is-small is-left">
+                                  <i class="fas fa-mail-bulk"></i>
+                                </span>
+                            </div>
+                            {% if form_errors(form.postal_code) %}
+                                <div class="help is-danger">{{ form_errors(form.postal_code) }}</div>
+                            {% endif %}
+                        </div>
+
+                        <div class="field">
+                            {{ form_label(form.city) }}
+
+                            <div class="control has-icons-left">
+                                {{ form_widget(form.city, {'attr': {'class':'input is-small'}}) }}
+                                <span class="icon is-small is-left">
+                                  <i class="fas fa-city"></i>
+                                </span>
+                            </div>
+
+                            {% if form_errors(form.city) %}
+                                <div class="help is-danger">{{ form_errors(form.city) }}</div>
+                            {% endif %}
+                        </div>
+
+                        <div class="field">
+                            {{ form_label(form.birthdate) }}
+                            <div class="select is-rounded is-small">
+                                {{ form_widget(form.birthdate.day) }}
+                            </div>
+                            <div class="select is-rounded is-small">
+                                {{ form_widget(form.birthdate.month) }}
+                            </div>
+                            <div class="select is-rounded is-small">
+                                {{ form_widget(form.birthdate.year) }}
+                            </div>
+
+                            {% if form_errors(form.birthdate) %}
+                                <div class="help is-danger">{{ form_errors(form.birthdate) }}</div>
+                            {% endif %}
+                        </div>
+
+                        <div class="field">
+                            {{ form_label(form.phone_number) }}
+
+                            <div class="control has-icons-left">
+                                {{ form_widget(form.phone_number, {'attr': {'class':'input is-small'}}) }}
+                                <span class="icon is-small is-left">
+                                  <i class="fas fa-phone"></i>
+                                </span>
+                            </div>
+                            {% if form_errors(form.phone_number) %}
+                                <div class="help is-danger">{{ form_errors(form.phone_number) }}</div>
+                            {% endif %}
+                        </div>
+
+
+{#                        <div class="field">#}
+{#                            <label class="label">univers_lego</label>#}
+{#                            <div class="control has-icons-left">#}
+{#                                <input class="input" type="text" placeholder="Text input" value="bulma">#}
+{#                                <span class="icon is-small is-left">#}
+{#                                  <i class="fas fa-user"></i>#}
+{#                                </span>#}
+{#                            </div>#}
+{#                            #}{#                            <p class="help is-success">This username is available</p>#}
+{#                        </div>#}
+
+                        <div class="field is-grouped">
+                            <div class="control">
+                                <button class="button is-link is-small">
+                                    <span class="icon"><i class="fas fa-check"></i></span>
+                                    <span>{{ 'btn.validate'|trans|capitalize }}</span>
+                                </button>
+                            </div>
+                            <div class="control">
+                                <button class="button is-link is-light is-outlined is-small">Récupérer mes données personnelles</button>
+                            </div>
+                        </div>
+                        {{ form_end(form) }}
+                    </div>
+
+                    <div class="box" id="a_email">
+                        <h2>{{ 'user.profil.email'|trans|capitalize }}</h2>
+
+                        <div class="notification" id="js-notification-email">
+                            <button class="delete" data-dismiss="notification"></button>
+                            <span class="js-notification-email-message js-message"></span>
+                        </div>
+
+                        {{ form_start(form_email) }}
+                        <div class="field" id="js-current-email">
+                            <label class="label">{{ 'user.profil.email'|trans|capitalize }}</label>
+                            <div class="control has-icons-left">
+                                <input class="input is-small" id="js-current-email-value" type="email" value="{{ app.user.email }}" disabled>
+                                <span class="icon is-small is-left">
+                                  <i class="fas fa-envelope"></i>
+                                </span>
+                            </div>
+                        </div>
+
+                        <div id="js-change-mail">
+                            <div class="field">
+                                {{ form_label(form_email.email) }}
+
+                                <div class="control has-icons-left has-icons-right">
+                                    {{ form_widget(form_email.email, {'attr': {'class':'input is-small', 'id' : 'js-new-mail'}}) }}
+                                    <span class="icon is-small is-left">
+                                      <i class="fas fa-envelope"></i>
+                                    </span>
+                                    <span class="icon is-small has-text-danger is-right">
+                                      <i class="fas fa-asterisk"></i>
+                                    </span>
+                                </div>
+                                {% if form_errors(form_email.email) %}
+                                    <div class="help is-danger">{{ form_errors(form_email.email) }}</div>
+                                {% endif %}
+                            </div>
+
+                            <div class="field">
+                                {{ form_label(form_email.email_repeat) }}
+
+                                <div class="control has-icons-left has-icons-right">
+                                    {{ form_widget(form_email.email_repeat, {'attr': {'class':'input is-small', 'id' : 'js-new-mail-confirm'}}) }}
+                                    <span class="icon is-small is-left">
+                                      <i class="fas fa-envelope"></i>
+                                    </span>
+                                    <span class="icon is-small has-text-danger is-right">
+                                      <i class="fas fa-asterisk"></i>
+                                    </span>
+                                </div>
+                                <p class="help is-warning">{{ 'user.profil.new_email.help'|trans|capitalize }}</p>
+                                {% if form_errors(form_email.email_repeat) %}
+                                    <div class="help is-danger">{{ form_errors(form_email.email_repeat) }}</div>
+                                {% endif %}
+                            </div>
+
+                            <div class="field">
+                                <div class="control has-icons-left has-icons-right">
+                                    {{ form_widget(form_email.password_confirm, {'attr': {'class':'input is-small', 'id' : 'js-mdp-validation'}}) }}
+                                    <span class="icon is-small is-left">
+                                          <i class="fas fa-unlock"></i>
+                                        </span>
+                                    <span class="icon is-small has-text-danger is-right">
+                                      <i class="fas fa-asterisk"></i>
+                                    </span>
+                                </div>
+                                {% if form_errors(form_email.password_confirm) %}
+                                    <div class="help is-danger">{{ form_errors(form_email.password_confirm) }}</div>
+                                {% endif %}
+                            </div>
+                        </div>
+
+                        <div class="field is-grouped">
+                            <div class="control js-btn-change-mail-waiting">
+                                <button class="button is-loading is-outlined is-small">
+                                </button>
+                            </div>
+                            <div class="control js-btn-show-change-mail">
+                                <button type="button" class="button is-link is-outlined is-small" id="js-show-change-mail">
+                                    <span class="icon"><i class="fas fa-lock"></i></span>
+                                    <span>{{ 'btn.change_email'|trans|capitalize }}</span>
+                                </button>
+                            </div>
+                            <div class="control js-btn-change-mail-validation">
+                                <button type="button" class="button is-success is-outlined is-small" id="js-validate-change-mail">
+                                    <span class="icon"><i class="fas fa-check"></i></span>
+                                    <span>{{ 'btn.validate'|trans|capitalize }}</span>
+                                </button>
+                            </div>
+                            <div class="control js-btn-change-mail-validation">
+                                <button type="button" class="button is-danger is-light is-outlined is-small" id="js-cancel-change-mail">
+                                    <span class="icon"><i class="fas fa-times"></i></span>
+                                    <span>{{ 'btn.cancel'|trans|capitalize }}</span>
+                                </button>
+                            </div>
+                        </div>
+                        {{ form_end(form_email) }}
+                    </div>
+
+                    <div class="box" id="a_password">
+                        <h2>{{ 'user.profil.password'|trans|capitalize }}</h2>
+
+                        <div class="notification" id="js-notification-password">
+                            <button class="delete" data-dismiss="notification"></button>
+                            <span class="js-notification-password-message js-message"></span>
+                        </div>
+
+                        {{ form_start(form_password) }}
+                        <div class="field" id="js-current-password">
+                            <label class="label">{{ 'user.profil.password'|trans|capitalize }}</label>
+                            <div class="control has-icons-left">
+                                <input class="input is-small" id="js-current-password-value" type="password" value="{{ app.user.password }}" disabled>
+                                <span class="icon is-small is-left">
+                                  <i class="fas fa-lock"></i>
+                                </span>
+                            </div>
+                        </div>
+
+                        <div id="js-change-password">
+                            <div class="field">
+                                {{ form_label(form_password.password) }}
+
+                                <div class="control has-icons-left has-icons-right">
+                                    {{ form_widget(form_password.password, {'attr': {'class':'input is-small', 'id' : 'js-new-password'}}) }}
+                                    <span class="icon is-small is-left">
+                                      <i class="fas fa-lock"></i>
+                                    </span>
+                                    <span class="icon is-small has-text-danger is-right">
+                                      <i class="fas fa-asterisk"></i>
+                                    </span>
+                                </div>
+                                {% if form_errors(form_password.password) %}
+                                    <div class="help is-danger">{{ form_errors(form_password.password) }}</div>
+                                {% endif %}
+                            </div>
+
+                            <div class="field">
+                                {{ form_label(form_password.password_repeat) }}
+
+                                <div class="control has-icons-left has-icons-right">
+                                    {{ form_widget(form_password.password_repeat, {'attr': {'class':'input is-small', 'id' : 'js-new-password-confirm'}}) }}
+                                    <span class="icon is-small is-left">
+                                      <i class="fas fa-lock"></i>
+                                    </span>
+                                    <span class="icon is-small has-text-danger is-right">
+                                      <i class="fas fa-asterisk"></i>
+                                    </span>
+                                </div>
+                                <p class="help is-warning">{{ 'user.profil.new_password.help'|trans|capitalize }}</p>
+                                {% if form_errors(form_password.password_repeat) %}
+                                    <div class="help is-danger">{{ form_errors(form_password.password_repeat) }}</div>
+                                {% endif %}
+                            </div>
+
+                            <div class="field">
+                                <div class="control has-icons-left has-icons-right">
+                                    {{ form_widget(form_password.password_confirm, {'attr': {'class':'input is-small', 'id' : 'js-mdp-validation'}}) }}
+                                    <span class="icon is-small is-left">
+                                          <i class="fas fa-unlock"></i>
+                                        </span>
+                                    <span class="icon is-small has-text-danger is-right">
+                                      <i class="fas fa-asterisk"></i>
+                                    </span>
+                                </div>
+                                {% if form_errors(form_password.password_confirm) %}
+                                    <div class="help is-danger">{{ form_errors(form_password.password_confirm) }}</div>
+                                {% endif %}
+                            </div>
+                        </div>
+
+                        <div class="field is-grouped">
+                            <div class="control js-btn-change-password-waiting">
+                                <button class="button is-loading is-outlined is-small">
+                                </button>
+                            </div>
+                            <div class="control js-btn-show-change-password">
+                                <button type="button" class="button is-link is-outlined is-small" id="js-show-change-password">
+                                    <span class="icon"><i class="fas fa-lock"></i></span>
+                                    <span>{{ 'btn.change_password'|trans|capitalize }}</span>
+                                </button>
+                            </div>
+                            <div class="control js-btn-change-password-validation">
+                                <button type="button" class="button is-success is-outlined is-small" id="js-validate-change-password">
+                                    <span class="icon"><i class="fas fa-check"></i></span>
+                                    <span>{{ 'btn.validate'|trans|capitalize }}</span>
+                                </button>
+                            </div>
+                            <div class="control js-btn-change-password-validation">
+                                <button type="button" class="button is-danger is-light is-outlined is-small" id="js-cancel-change-password">
+                                    <span class="icon"><i class="fas fa-times"></i></span>
+                                    <span>{{ 'btn.cancel'|trans|capitalize }}</span>
+                                </button>
+                            </div>
+                        </div>
+                        {{ form_end(form_password) }}
+                    </div>
+
+                    <div class="box" id="a_deleteaccount">
+                        <h2>{{ 'user.profil.delete.title'|trans|capitalize }}</h2>
+
+                        <div class="notification" id="js-notification-delete">
+                            <button class="delete" data-dismiss="notification"></button>
+                            <span class="js-notification-delete-message js-message"></span>
+                        </div>
+
+                        <div id="js-delete">
+                            <p class="notification is-danger">{{ 'delete.are_you_sure'|trans|capitalize }}</p>
+
+                            <div class="field">
+                                <div class="control has-icons-left has-icons-right">
+                                    <input type="password" id="userdelete_password_confirm" name="userdelete[password_confirm]" required="required" class="input is-small">
+                                    <span class="icon is-small is-left">
+                                          <i class="fas fa-unlock"></i>
+                                        </span>
+                                    <span class="icon is-small has-text-danger is-right">
+                                      <i class="fas fa-asterisk"></i>
+                                    </span>
+                                </div>
+                                <div class="help is-warning">{{ 'user.profil.delete.help'|trans|capitalize }}</div>
+                            </div>
+                        </div>
+
+                        <div class="field is-grouped">
+                            <div class="control js-btn-delete-waiting">
+                                <button class="button is-loading is-outlined is-small">
+                                </button>
+                            </div>
+                            <div class="control js-btn-show-delete">
+                                <button type="button" class="button is-danger is-outlined is-small" id="js-show-delete">
+                                    <span class="icon"><i class="fas fa-skull-crossbones"></i></span>
+                                    <span>{{ 'btn.delete_account'|trans|capitalize }}</span>
+                                </button>
+                            </div>
+                            <div class="control js-btn-delete-validation">
+                                <button type="button" class="button is-danger is-outlined is-small" id="js-validate-delete">
+                                    <span class="icon"><i class="fas fa-skull-crossbones"></i></span>
+                                    <span>{{ 'btn.delete_confirm'|trans|capitalize }}</span>
+                                </button>
+                            </div>
+                            <div class="control js-btn-delete-validation">
+                                <button type="button" class="button is-success is-light is-outlined is-small" id="js-cancel-delete">
+                                    <span class="icon"><i class="fas fa-check"></i></span>
+                                    <span>{{ 'btn.cancel'|trans|capitalize }}</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+        </div>
+    </div>
+
+{% endblock %}
+
+
+{% block javascripts %}
+    {{ parent() }}
+
+    <script type="application/javascript">
+        $(document).on('click', '#js-show-change-mail', function(){
+            $('#js-change-mail').show();
+            $('.js-btn-change-mail-validation').show();
+            $('#js-current-email').hide();
+            $('.js-btn-show-change-mail').hide();
+        });
+
+        $(document).on('click', '#js-cancel-change-mail', function(){
+            $('#js-change-mail').hide();
+            $('.js-btn-show-change-mail').show();
+            $('.js-btn-change-mail-validation').hide();
+            $('#js-current-email').show();
+        });
+
+        $(document).on('click', '#js-validate-change-mail', function(){
+            let form = $('form[name="usermail"]');
+
+            let errors = 0;
+            form.find('input[required]').each(function(){
+                if($(this).val().length === 0){
+                    errors++;
+                    $(this).addClass('is-danger');
+                } else {
+                    $(this).removeClass('is-danger');
+                }
+            });
+
+            if(errors !== 0){
+                $('#js-notification-email')
+                    .show()
+                    .addClass('is-danger')
+                    .removeClass('is-success')
+                    .find('.js-notification-email-message').html('Champs obligatoire');
+            } else {
+                $('.js-btn-change-mail-waiting').show();
+
+                $.post(form.attr("action"), form.serialize(), function (datas) {
+                    if (datas.length !== 0) {
+                        $('#js-notification-email')
+                            .show()
+                            .addClass('is-success')
+                            .removeClass('is-danger')
+                            .find('.js-notification-email-message').html(datas.message);
+
+                        $('#js-change-mail').hide();
+                        $('.js-btn-change-mail-validation').hide();
+                        $('.js-btn-cancel-mail-validation').hide();
+                        $('.js-btn-show-change-mail').show();
+                        $('#js-current-email-value').val(datas.newValue);
+                        $('#js-current-email').show();
+                    }
+                }).fail(function (jqXHR, textStatus, error) {
+                    let ret = JSON.parse(jqXHR.responseText);
+
+                    $('#js-notification-email')
+                        .show()
+                        .addClass('is-danger')
+                        .removeClass('is-success')
+                        .find('.js-notification-email-message').html(ret.message);
+                }).always(function () {
+                    $('.js-btn-change-mail-waiting').hide();
+                });
+            }
+        });
+
+        $(document).on('click', '#js-show-change-password', function(){
+            $('#js-change-password').show();
+            $('.js-btn-change-password-validation').show();
+            $('#js-current-password').hide();
+            $('.js-btn-show-change-password').hide();
+        });
+
+        $(document).on('click', '#js-cancel-change-password', function(){
+            $('#js-change-password').hide();
+            $('.js-btn-show-change-password').show();
+            $('.js-btn-change-password-validation').hide();
+            $('#js-current-password').show();
+        });
+
+        $(document).on('click', '#js-validate-change-password', function(){
+            let form = $('form[name="userpassword"]');
+            let errors = 0;
+
+            form.find('input[required]').each(function(){
+                if($(this).val().length === 0){
+                    errors++;
+                    $(this).addClass('is-danger');
+                } else {
+                    $(this).removeClass('is-danger');
+                }
+            });
+
+            if(errors !== 0){
+                $('#js-notification-password')
+                    .show()
+                    .addClass('is-danger')
+                    .removeClass('is-success')
+                    .find('.js-notification-password-message').html('Champs obligatoire');
+            } else {
+                $('.js-btn-change-password-waiting').show();
+
+                $.post(form.attr("action"), form.serialize(), function (datas) {
+                    if (datas.length !== 0) {
+                        $('#js-notification-password')
+                            .show()
+                            .addClass('is-success')
+                            .removeClass('is-danger')
+                            .find('.js-notification-password-message').html(datas.message);
+
+                        $('#js-change-password').hide();
+                        $('.js-btn-change-password-validation').hide();
+                        $('.js-btn-cancel-password-validation').hide();
+                        $('.js-btn-show-change-password').show();
+                        $('#js-current-password-value').val(datas.newValue);
+                        $('#js-current-password').show();
+                    }
+                }).fail(function (jqXHR, textStatus, error) {
+                    let ret = JSON.parse(jqXHR.responseText);
+
+                    $('#js-notification-password')
+                        .show()
+                        .addClass('is-danger')
+                        .removeClass('is-success')
+                        .find('.js-notification-password-message').html(ret.message);
+                }).always(function () {
+                    $('.js-btn-change-password-waiting').hide();
+                });
+            }
+        });
+
+        $(document).on('click', '#js-show-delete', function(){
+            $('#js-delete').show();
+            $('.js-btn-delete-validation').show();
+            $('.js-btn-show-delete').hide();
+        });
+
+        $(document).on('click', '#js-cancel-delete', function(){
+            $('#js-delete').hide();
+            $('.js-btn-show-delete').show();
+            $('.js-btn-delete-validation').hide();
+        });
+
+        $(document).on('click', '#js-validate-delete', function(){
+            if($('#userdelete_password_confirm').val().length === 0){
+                $('#userdelete_password_confirm').addClass('is-danger');
+                $('#js-notification-delete')
+                    .show()
+                    .addClass('is-danger')
+                    .removeClass('is-success')
+                    .find('.js-notification-delete-message').html('Champs obligatoire');
+            } else {
+                $('.js-btn-delete-waiting').show();
+
+                let data = {};
+                data['mdp'] = $('#userdelete_password_confirm').val();
+
+                $.ajax({
+                    url: '{{ path('user.delete.account') }}',
+                    method: 'POST',
+                    dataType: 'json',
+                    data: data,
+                    async: true,
+                }).done(function(){
+                    $(location).attr('href', '{{ path('app_logout') }}');
+                }).fail(function(jqXHR, textStatus, error){
+                    let ret = JSON.parse(jqXHR.responseText);
+
+                    $('#js-notification-delete')
+                        .show()
+                        .addClass('is-danger')
+                        .removeClass('is-success')
+                        .find('.js-notification-delete-message').html(ret.message);
+                }).always(function () {
+                    $('.js-btn-delete-waiting').hide();
+                });
+            }
+        });
+    </script>
+{% endblock %}

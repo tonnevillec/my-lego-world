@@ -1,0 +1,51 @@
+#css_profil.hero.is-fullheight .hero-body {
+  align-items: normal !important;
+}
+
+#css_profil {
+  #left_menu,
+  #left_menu a {
+    color:$white;
+  }
+
+  #left_menu a:hover {
+    color:$info;
+    border-bottom: none;
+  }
+
+  #content {
+    .box h2 {
+      font-size: 1.5rem;
+      border-bottom: 1px solid $dark;
+      padding-bottom: 1rem;
+      margin-bottom: 1rem;
+    }
+  }
+
+  #js-change-mail,
+  .js-btn-change-mail-validation,
+  .js-btn-change-mail-waiting,
+  #js-notification-email,
+  #js-change-password,
+  .js-btn-change-password-validation,
+  .js-btn-change-password-waiting,
+  #js-notification-password,
+  #js-delete,
+  .js-btn-delete-validation,
+  .js-btn-delete-waiting,
+  #js-notification-delete
+  {
+    display: none;
+  }
+
+  #js-change-mail,
+  #js-change-password,
+  #js-delete
+  {
+    margin-bottom: 0.75rem;
+  }
+
+  .notification {
+    padding: 0.75rem 1rem;
+  }
+}
