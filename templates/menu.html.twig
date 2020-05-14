@@ -22,12 +22,26 @@
                 <span>Home</span>
             </a>
 
+            <a class="navbar-item {% if app.request.get('_route') in ['legosets'] %}is-active{% endif %}" href="{{ path('legosets') }}">
+                <span class="icon">
+                    <i class="fa fa-search"></i>
+                </span>
+                <span>{{ 'link.legosets'|trans|capitalize }}</span>
+            </a>
+
             {% if app.user %}
+            <a class="navbar-item {% if app.request.get('_route') in ['legotheque'] %}is-active{% endif %}" href="{{ path('legotheque') }}">
+                <span class="icon">
+                    <i class="fa fa-plus"></i>
+                </span>
+                <span>{{ 'link.legotheque'|trans }}</span>
+            </a>
+
             <a class="navbar-item {% if app.request.get('_route') in ['test'] %}is-active{% endif %}" href="#">
                 <span class="icon">
                     <i class="fa fa-plus"></i>
                 </span>
-                <span>Légothèque</span>
+                <span>{{ 'link.wishlist'|trans|capitalize }}</span>
             </a>
             {% endif %}
         </div>

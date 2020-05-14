@@ -2,3 +2,38 @@ $light_blue: #F2F6FA;
 $white: #FFF;
 
 $info: #f03250;
+
+
+$section-padding: 1.5rem 0.75rem;
+
+$grey-light: hsl(0, 0%, 71%);
+
+//$text-strong: $white;
+//$text-light: hsl(0, 0%, 86%);
+
+//$border: $white;
+//$link-hover: $info;
+//$link-hover-border: $info;
+//$link-focus: $info;
+//$link-focus-border: $white;
+//$link-active: $info;
+//$link-active-border: $white;
+//$link-invert: $white;
+//$link: $info;
+
+
+$pagination-color: $white;
+$pagination-border-color: $white;
+$pagination-hover-color: $info;
+$pagination-hover-border-color: $white;
+$pagination-focus-color: $info;
+$pagination-focus-border-color: $white;
+$pagination-active-color: $info;
+$pagination-active-border-color: $white;
+$pagination-disabled-color: hsl(0, 0%, 86%);
+$pagination-disabled-background-color: $white;
+$pagination-disabled-border-color: $white;
+$pagination-current-color: $white;
+$pagination-current-background-color: $info;
+$pagination-current-border-color: $info;
+$pagination-ellipsis-color: $grey-light;

@@ -743,6 +743,11 @@
     lodash "^4.17.13"
     to-fast-properties "^2.0.0"
 
+"@creativebulma/bulma-tooltip@^1.0.2":
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/@creativebulma/bulma-tooltip/-/bulma-tooltip-1.0.2.tgz#87885c1427f80ced188ae85eb29d5724a46b595b"
+  integrity sha512-/ykRqquizWxN9L3TicJs2doEuX7npPuwxT+WDykDs3QBAys8IiIWYxBZ04/G+Us+Z2gOe2Tg2x0+mW9tTAiT7w==
+
 "@fortawesome/fontawesome-free@^5.13.0":
   version "5.13.0"
   resolved "https://registry.yarnpkg.com/@fortawesome/fontawesome-free/-/fontawesome-free-5.13.0.tgz#fcb113d1aca4b471b709e8c9c168674fbd6e06d9"

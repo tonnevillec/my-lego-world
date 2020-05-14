@@ -1,5 +1,11 @@
 back_to_site: 'Retour au site'
 required_field: 'champ requis'
+back_to_top: 'retour en haut de page'
+
+link:
+    legosets: 'Recherche'
+    legotheque: 'Ma Légothèque'
+    wishlist: 'liste de souhaits'
 
 btn:
     validate: 'valider les modifications'
@@ -8,6 +14,9 @@ btn:
     delete_account: 'supprimer mon compte'
     delete_confirm: 'confirmer la suppression'
     cancel: 'annuler'
+    search: 'go!'
+    reset: 'réinitialiser'
+    show_more: 'voir plus'
 
 delete:
     are_you_sure: "êtes-vous sûre de vouloir supprimer votre compte ainsi que tout son contenu? Cette opération est irréversible et nous serons très triste de vous perdre :("
@@ -80,3 +89,10 @@ user:
         label: 'date de naissance'
     phone_number:
         label: 'téléphone'
+
+legos:
+    value_all: 'tout'
+    subthemes:
+        title: 'sous catégories'
+    themes:
+        title: 'catégories'

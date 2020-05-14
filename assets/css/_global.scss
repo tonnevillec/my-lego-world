@@ -45,7 +45,18 @@ a:hover {
   }
 }
 
+.is-border-bottom {
+  border-bottom: 1px solid $white;
+}
+
 .footer {
   background-color: $dark;
   border-top: 1px solid whitesmoke;
+}
+
+a.pagination-link:hover,
+a.pagination-previous:hover,
+a.pagination-next:hover {
+  background-color: $white !important;
+  color: $info !important;
 }
