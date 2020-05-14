@@ -163,13 +163,29 @@ class BricksetController extends AbstractController
                 $lsets->setNumber($k['number']);
                 $lsets->setNumberVariant($k['numberVariant']);
                 $lsets->setName($k['name']);
-                $lsets->setYear($k['year']);
-                $lsets->setTheme($k['theme']);
-                $lsets->setThemeGroup($k['themeGroup']);
-                $lsets->setCategory($k['category']);
-                $lsets->setReleased($k['released']);
-                $lsets->setPieces($k['pieces']);
-                $lsets->setMinifigs($k['minifigs']);
+                if(array_key_exists('year', $k)) {
+                    $lsets->setYear($k['year']);
+                }
+                if(array_key_exists('theme', $k)) {
+                    $lsets->setTheme($k['theme']);
+                }
+                if(array_key_exists('themeGroup', $k)) {
+                    $lsets->setThemeGroup($k['themeGroup']);
+                }
+                if(array_key_exists('category', $k)) {
+                    $lsets->setCategory($k['category']);
+                }
+                if(array_key_exists('released', $k)) {
+                    $lsets->setReleased($k['released']);
+                }
+                if(array_key_exists('pieces', $k)) {
+                    $lsets->setPieces($k['pieces']);
+                } else {
+                    $lsets->setPieces(0);
+                }
+                if(array_key_exists('minifigs', $k)) {
+                    $lsets->setMinifigs($k['minifigs']);
+                }
                 if(array_key_exists('thumbnailURL', $k['image'])){
                     $lsets->setThumbnailURL($k['image']['thumbnailURL']);
                 }
