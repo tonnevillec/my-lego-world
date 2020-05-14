@@ -7,5 +7,11 @@
       <jdbc-driver>com.mysql.cj.jdbc.Driver</jdbc-driver>
       <jdbc-url>jdbc:mysql://192.168.10.10:3306/legos</jdbc-url>
     </data-source>
+    <data-source source="LOCAL" name="legos@docker" uuid="4c912238-aa05-47db-90c1-924e73590852">
+      <driver-ref>mysql.8</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>com.mysql.cj.jdbc.Driver</jdbc-driver>
+      <jdbc-url>jdbc:mysql://localhost:3306/legos</jdbc-url>
+    </data-source>
   </component>
 </project>

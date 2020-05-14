@@ -1,0 +1,302 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ 'link.legosets'|trans|capitalize }}{% endblock %}
+
+{% block css_page %}css_default{% endblock %}
+
+{% block body %}
+    <section class="section">
+        <div class="container has-text-white">
+            <h2 class="is-size-3">{{ 'link.legosets'|trans|upper }}</h2>
+
+            <div class="box" id="top">
+                <div class="field is-grouped">
+                    <input type="hidden" name="searchBox" value="" class="js-search-hidden">
+
+                    <div class="control">
+                        <div class="select is-small">
+                            <select class="js-perPage">
+                                <option value="5">5</option>
+                                <option value="10" selected>10</option>
+                                <option value="25">25</option>
+                                <option value="50">50</option>
+                                <option value="100">100</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="control">
+                        <div class="select is-small">
+                            <select class="js-themes">
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="control is-hidden js-subtheme-parent">
+                        <div class="select is-small">
+                            <select class="js-subthemes" data-parent="js-subtheme-parent" data-default="{{ 'legos.subthemes.title'|trans|capitalize }}">
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="field is-grouped">
+                        <p class="control">
+                            <button class="button is-info js-btn-search has-icon is-small">
+                                <span class="icon"><i class="fas fa-search"></i></span>
+                                <span>{{ 'btn.search'|trans|capitalize }}</span>
+                            </button>
+                        </p>
+
+                        <p class="control">
+                            <button class="button is-warning js-btn-reset has-icon is-small" data-tooltip="{{ 'btn.reset'|trans|capitalize }}">
+                                <span class="icon"><i class="fas fa-reply-all"></i></span>
+                            </button>
+                        </p>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="container">
+            <div class="columns is-multiline js-sets">
+            </div>
+
+            <div class="has-text-centered is-hidden js-loading-button">
+                <button class="button is-loading is-large"></button>
+            </div>
+
+            <div class="is-centered is-hidden js-progress-div js-progress-tooltip" data-tooltip="0/100">
+                <progress class="progress is-info js-progress" value="0" max="100">0/100</progress>
+            </div>
+
+            <div class="has-text-centered is-hidden js-pagination">
+                <button class="button is-outlined js-show-more" data-current="1">{{ 'btn.show_more'|trans|capitalize }}</button>
+                <input type="hidden" name="current-page" class="js-current" value="1">
+            </div>
+
+            <div class="has-text-right is-hidden js-back-to-top">
+                <a href="#top" class="button is-info is-outlined">{{ 'back_to_top'|trans|capitalize }}</a>
+            </div>
+        </div>
+    </section>
+
+{% endblock %}
+
+
+{% block javascripts %}
+    {{ parent() }}
+
+    <script type="application/javascript">
+        $(document).ready(function(){
+            loadThemes();
+        });
+
+        $(document).on('change', '.js-themes', function(){
+            let $theme = $(this).val();
+            let tab;
+            let data = {};
+            let $subthemes = $('.js-subthemes');
+
+            $('.' + $subthemes.data('parent') + '').addClass('is-hidden');
+            $subthemes.html('')
+                .append('<option value="">'+$subthemes.data('default')+'</option>');
+
+            data['theme'] = $theme;
+            $.ajax({
+                url: '{{ path('api.getSubthemes') }}',
+                method: 'POST',
+                data: data,
+                dataType: 'json',
+                async: true,
+            }).done(function(datas){
+                for(let i = 0; i < datas.subthemes.length; i++){
+                    tab = datas.subthemes[i];
+                    let $name = tab.subtheme;
+                    let $value = tab.subtheme;
+                    if($name === '{None}') {
+                        $value = '';
+                        $name = "{{ 'legos.value_all'|trans|capitalize }}";
+                    }
+                    $subthemes.append('<option value="'+$value+'">'+$name+'</option>');
+                    $('.' + $subthemes.data('parent') + '').removeClass('is-hidden');
+                }
+            });
+        });
+
+        $(document).on('click', '.js-btn-search', function(){
+            let $current = '1';
+
+            resetAll();
+
+            initSearch($current);
+
+            loadResult($current);
+        });
+
+        $(document).on('click', '.js-show-more', function(e){
+            e.preventDefault();
+
+            let $current = parseInt($('.js-current').val());
+            let $perPage = 15;
+
+            initSearch($current);
+
+            loadResult($current, $perPage);
+        });
+
+        $(document).on('click', '.js-btn-reset', function(){
+            let $subthemes = $('.js-subthemes');
+
+            $('.' + $subthemes.data('parent') + '').addClass('is-hidden');
+            $subthemes.html('')
+                .append('<option value="">'+$subthemes.data('default')+'</option>');
+
+            loadThemes();
+
+            resetAll();
+        })
+
+
+        function loadThemes(){
+            let tab;
+
+            $('.js-themes').html('')
+                .append('<option>{{ 'legos.themes.title'|trans|capitalize }}</option>');
+
+            $.ajax({
+                url: '{{ path('api.getThemes') }}',
+                method: 'POST',
+                dataType: 'json',
+                async: true,
+            }).done(function(datas){
+                for(let i = 0; i < datas.themes.length; i++){
+                    tab = datas.themes[i];
+                    // $('.js-themes').append('<option value="'+tab.theme+'">'+tab.theme+' ('+tab.setCount+')</option>');
+                    $('.js-themes').append('<option value="'+tab.theme+'">'+tab.theme+'</option>');
+                }
+            });
+        }
+
+        function resetAll(){
+            $('.js-loading-button').addClass('is-hidden');
+            $('.js-progress-div').addClass('is-hidden');
+            $('.js-back-to-top').addClass('is-hidden');
+            $('.js-pagination').addClass('is-hidden');
+
+            $('.js-sets').html('');
+        }
+
+        function initSearch($current){
+            let $params = '';
+            let $theme = $('.js-themes').val();
+            let $subtheme = $('.js-subthemes').val();
+            let $perPage = $('.js-perPage').val();
+            let $paginate = "'pageSize':"+$perPage+",'pageNumber':"+$current+",'orderBy':'Name'";
+            let $subParam = '';
+
+            if($subtheme !== ''){
+                $subParam = "'subtheme':'"+$subtheme+"',";
+            }
+            $params = "{'theme':'"+$theme+"',"+$subParam+""+$paginate+"}";
+            $('.js-search-hidden').val($params);
+        }
+
+        function loadResult($current) {
+            let tab;
+            let $perPage = $('.js-perPage').val();
+            let data = {};
+            data['params'] = $('.js-search-hidden').val();
+
+            $('.js-loading-button').removeClass('is-hidden');
+
+            $.ajax({
+                url: '{{ path('api.getSets') }}',
+                method: 'POST',
+                data: data,
+                dataType: 'json',
+                async: true,
+            }).done(function(datas){
+                for(let i = 0; i < datas.sets.length; i++){
+                    tab = datas.sets[i];
+
+                    let $card ='<div class="column is-half-tablet is-one-third-desktop">';
+                    $card += '<div class="card has-ribbon">';
+                    $card += '<div class="ribbon is-primary">';
+                        $card += '<button class="button has-icon"><span class="icon"><i class="fas fa-star"></i></span></button>';
+                    $card += '</div>';
+                    $card += '<div class="card-image">';
+                    if(tab.image.imageURL !== undefined) {
+                        $card += '<figure class="image is-4by3"> <img src="' + tab.image.imageURL + '" alt="' + tab.name + '"> </figure>';
+                    }
+                    $card += '</div>';
+                    $card += '<div class="card-content">';
+                    // $card += '<div class="media">';
+                    //     $card += '<div class="media-left">';
+                    //         $card += '<figure class="image"> <img src="'+tab.image.thumbnailURL+'" alt="Miniature '+tab.name+'"> </figure>';
+                    //     $card += '</div>';
+                    //     $card += '<div class="media-content">';
+                    //         $card += '<p class="title is-4">'+tab.name+'</p>';
+                    //         $card += '<p class="subtitle is-6">'+tab.theme+'</p>';
+                    // $card += '</div>';
+                    // $card += '</div>';
+                    $card += '<div class="content">';
+                    $card += '<div class="tags"><span class="tag">'+tab.theme+'</span><span class="tag">'+tab.subtheme+'</span><span class="tag">'+tab.themeGroup+'</span></div>';
+                    $card += '<br/>';
+                    $card += '<ul>';
+                    $card += '<li>Name : '+tab.name+'</li>';
+                    $card += '<li>SetID : '+tab.setID+'</li>';
+                    $card += '<li>SetNumber : '+tab.number+'-'+tab.numberVariant+'</li>';
+                    $card += '<li>year : '+tab.year+'</li>';
+                    $card += '<li>pieces : '+tab.pieces+'</li>';
+                    $card += '<li>minifigs : '+tab.minifigs+'</li>';
+                    $card += '<li>rating : '+tab.rating+'</li>';
+                    $card += '<li>ageRange : TODO => array min / ...</li>';
+                    $card += '<li>barcode : TODO => array EAN / ...</li>';
+                    $card += '<li>lastUpdated : '+tab.lastUpdated+'</li>';
+                    $card += '</ul>';
+                    $card += '</div>';
+                    $card += '</div>';
+                    $card += '</div>';
+                    $card += '</div>';
+
+                    $('.js-sets').append($card);
+                }
+
+                let $max = parseInt(parseInt($current) * parseInt($perPage));
+                let $nb = Math.ceil(datas.matches / parseInt($perPage));
+
+                $('.js-progress').attr('max', $nb).html('Page ' + $current + ' / ' + $nb);
+                $('.js-progress-tooltip').attr('data-tooltip', $current+' / ' + $nb);
+
+                if($max < datas.matches){
+                    $('.js-current').val(parseInt($current)+1);
+                    $('.js-pagination').removeClass('is-hidden');
+                } else {
+                    $('.js-pagination').addClass('is-hidden');
+                }
+            }).always(function(){
+                $('.js-loading-button').addClass('is-hidden');
+                $('.js-progress').val(parseInt($current)).html('Page ' + $current + ' / ' + $current);
+                $('.js-progress-div').removeClass('is-hidden');
+                $('.js-back-to-top').removeClass('is-hidden');
+            });
+        }
+
+
+
+
+        // eg:
+        // data['params'] = "{'theme':'Star Wars'}";
+        // data['params'] = "{'subtheme':'Rebels'}";
+        // data['params'] = "{'setNumber':'75218-1'}";
+        // data['params'] = "{'query':'75218'}"; => query search in setNumber / name / theme / subtheme
+
+        {#data['params'] = "{'query':'7074'}";#}
+
+
+
+    </script>
+{% endblock %}

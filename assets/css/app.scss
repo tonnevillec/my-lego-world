@@ -3,8 +3,10 @@
 @import "variables";
 @import "~bulma";
 @import "~bulma-extensions";
+@import "~@creativebulma/bulma-tooltip";
 
 @import "global";
+@import "default_page";
 @import "login";
 @import "landing";
 @import "profil";

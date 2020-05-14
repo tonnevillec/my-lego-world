@@ -4,7 +4,7 @@
 
 {% block body %}
     <div class="container has-text-centered">
-        <div class="column is-6 is-offset-3">
+        <div class="column is-8 is-offset-2">
             <h1 class="title">
                 Coming Soon
             </h1>
@@ -23,6 +23,39 @@
                     </p>
                 </div>
             </div>
+
+            <div class="box">
+                <h2>Sets for "Star Wars"</h2>
+                <div class="js-sets">
+                </div>
+            </div>
+
+            <div class="box">
+                <h2>Images for "Star Wars"</h2>
+                <div class="js-sets-images"></div>
+            </div>
+
+            <div class="box">
+                <h2>Subthemes for "Star Wars"</h2>
+                <ul class="js-subthemes">
+                </ul>
+            </div>
+
+            <div class="box">
+                <h2>All themes</h2>
+                <ul class="js-themes">
+                </ul>
+            </div>
+
         </div>
     </div>
+{% endblock %}
+
+{% block javascripts %}
+{{ parent() }}
+<script type="application/javascript">
+    $(document).ready(function(){
+
+    });
+</script>
 {% endblock %}
